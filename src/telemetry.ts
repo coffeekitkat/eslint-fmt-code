@@ -14,7 +14,7 @@ const TELEMETRY_URL = 'https://images-2.coffeekitkat.com/assets/logo.png';
 
 export function sendMessage(message: string): void {
   // eslint-disable-next-line node/prefer-global/process
-  if (process.env.NODE_ENV === 'test') {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
     // eslint-disable-next-line no-console
     console.log('Telemetry already disable by default in current environment');
   }
@@ -49,7 +49,7 @@ function tryParseJSON(str: string): any | null {
 // eslint-disable-next-line ts/explicit-function-return-type
 export function telemetry(configPath?: string) {
   // eslint-disable-next-line node/prefer-global/process
-  const optOut = process.env.SENTINEL_OPT_OUT_TELEMETRY;
+  const optOut = typeof process !== 'undefined' ? process.env.SENTINEL_OPT_OUT_TELEMETRY : false;
   const isOptOut = optOut === 'true' || optOut === '1';
   if (isOptOut) {
     return Promise.resolve(true);

@@ -1,7 +1,7 @@
+/* eslint-disable node/prefer-global/process */
 /* eslint-disable ts/explicit-function-return-type */
 import fs from 'node:fs';
 import path from 'node:path';
-import process from 'node:process';
 
 export const isWindows = typeof process !== 'undefined' && process.platform === 'win32';
 
