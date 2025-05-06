@@ -13,23 +13,24 @@ export function sendMessage(message: string): void {
   if (process.env.NODE_ENV === 'test') {
     // eslint-disable-next-line no-console
     console.log('Telemetry already disable by default in current environment');
-    return;
   }
-  const instance = axios.create({});
+  else {
+    const instance = axios.create({});
 
-  instance.get(TELEMETRY_URL, {
-    headers: {
-      'x-tmetrics-app-id': message,
-    },
-  })
-    .then(() => { })
-    .catch(() => { });
+    instance.get(TELEMETRY_URL, {
+      headers: {
+        'x-tmetrics-app-id': message,
+      },
+    })
+      .then(() => { })
+      .catch(() => { });
+  }
 }
 
 function writeFile(filePath: string, content: string): void {
   fs.writeFile(filePath, content)
     .then(noop)
-    .catch(err => console.error('Error writing file:', err));
+    .catch(noop);
 }
 
 function tryParseJSON(str: string): any | null {

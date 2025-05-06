@@ -18,14 +18,14 @@ describe('telemetry', () => {
 
     return telemetry(configDir).then(() => {
       const stat = tryStatSync(path.join(configDir, '.telemetry-config'));
-    
+
       const metricFileExists = existsSync(path.join(configDir, '.telemetry-config'));
-      
-      if(metricFileExists) {
+
+      if (metricFileExists) {
         const metricContent = readFile(path.join(configDir, '.telemetry-config'));
-        console.log('metricContent', metricContent.toString('utf-8'));
+        console.warn('metricContent', metricContent.toString('utf-8'));
       }
-      
+
       expect(stat).not.toBeUndefined();
       expect(metricFileExists).toBe(true);
     });
