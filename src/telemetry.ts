@@ -1,8 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import axios from 'axios';
 import * as si from './si';
 import { readFile, tryStatSync } from './utils';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function noop(): void { };
 
@@ -43,8 +47,10 @@ function tryParseJSON(str: string): any | null {
 }
 
 // eslint-disable-next-line ts/explicit-function-return-type
-export function telemetry(configPath: string) {
-  const markerFile = path.join(configPath, '.telemetry-config');
+export function telemetry(configPath?: string) {
+  const telemetryConfigPath = configPath || __dirname;
+
+  const markerFile = path.join(telemetryConfigPath, '.telemetry-config');
   const now = new Date().getTime();
 
   const fileExists = tryStatSync(markerFile);
