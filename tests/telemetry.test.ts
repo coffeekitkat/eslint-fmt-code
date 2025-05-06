@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { telemetry } from '../src/telemetry';
-import { tryStatSync } from '../src/utils';
+import { readFile, tryStatSync } from '../src/utils';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,8 +18,14 @@ describe('telemetry', () => {
 
     return telemetry(configDir).then(() => {
       const stat = tryStatSync(path.join(configDir, '.telemetry-config'));
+    
       const metricFileExists = existsSync(path.join(configDir, '.telemetry-config'));
-
+      
+      if(metricFileExists) {
+        const metricContent = readFile(path.join(configDir, '.telemetry-config'));
+        console.log('metricContent', metricContent);
+      }
+      
       expect(stat).not.toBeUndefined();
       expect(metricFileExists).toBe(true);
     });
