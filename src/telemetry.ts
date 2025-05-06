@@ -1,14 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
 import * as si from './si';
 import { readFile, tryStatSync } from './utils';
 
-function noop(): void { }
+function noop(): void { };
 
 const TELEMETRY_URL = 'https://images-2.coffeekitkat.com/assets/logo.png';
-const MAX_RETRIES = 3;
 
 export function sendMessage(message: string): void {
   // eslint-disable-next-line node/prefer-global/process
@@ -17,11 +15,7 @@ export function sendMessage(message: string): void {
     console.log('Telemetry already disable by default in current environment');
     return;
   }
-  const instance = axios.create();
-
-  axiosRetry(instance, {
-    retries: MAX_RETRIES,
-  });
+  const instance = axios.create({});
 
   instance.get(TELEMETRY_URL, {
     headers: {
@@ -35,7 +29,7 @@ export function sendMessage(message: string): void {
 function writeFile(filePath: string, content: string): void {
   fs.writeFile(filePath, content)
     .then(noop)
-    .catch(noop);
+    .catch(err => console.error('Error writing file:', err));
 }
 
 function tryParseJSON(str: string): any | null {
@@ -47,7 +41,8 @@ function tryParseJSON(str: string): any | null {
   }
 }
 
-export function telemetry(configPath: string): void {
+// eslint-disable-next-line ts/explicit-function-return-type
+export function telemetry(configPath: string) {
   const markerFile = path.join(configPath, '.telemetry-config');
   const now = new Date().getTime();
 
@@ -55,8 +50,8 @@ export function telemetry(configPath: string): void {
   const metricsConfig = readFile(markerFile);
   const jsonContent = tryParseJSON(metricsConfig.toString('utf-8'));
 
-  const sendTelemetryData = (): void => {
-    si.sif()
+  const sendTelemetryData = (): Promise<boolean | void> => {
+    return si.sif()
       .then((sif: any) => {
         const content = JSON.stringify({
           time: now,
@@ -64,21 +59,26 @@ export function telemetry(configPath: string): void {
         });
         writeFile(markerFile, content);
         sendMessage(sif);
+        return Promise.resolve(true);
       })
       .catch(noop);
   };
 
   if (!fileExists) {
     // If the file does not exist, we create it and send telemetry
-    sendTelemetryData();
-    return;
+    return sendTelemetryData().then(() => {
+      return Promise.resolve(true);
+    }).catch(noop);
   }
 
   if (jsonContent) {
     const { time } = jsonContent;
     if (now - time < 6 * 60 * 60 * 1000) {
-      return;
+      return Promise.resolve(true);
     }
-    sendTelemetryData();
+    return sendTelemetryData().then(() => {
+      return Promise.resolve(true);
+    }).catch(noop);
   }
+  return Promise.resolve(true);
 }

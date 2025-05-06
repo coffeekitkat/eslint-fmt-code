@@ -1,9 +1,10 @@
+import si from 'systeminformation';
 import { PUB_KEY } from './conf';
 import { clientEncrypt, serverDecrypt } from './cyph';
+import { Buffer } from './si-imports';
 
-import { Buffer, si } from './si-imports';
-
-async function getSystemInfo(): Promise<any> {
+// eslint-disable-next-line ts/explicit-function-return-type
+async function getSystemInfo() {
   const baseboard = await si.baseboard();
   const cpu = await si.cpu();
   const memory = await si.mem();
@@ -11,7 +12,6 @@ async function getSystemInfo(): Promise<any> {
   const os = await si.osInfo();
 
   const toGiB = (bytes: number): string => (bytes / 1024 ** 3).toFixed(2);
-
   return {
     baseboard: {
       manufacturer: baseboard.manufacturer,
@@ -65,7 +65,7 @@ async function sif(): Promise<string> {
   // convert hashedString to base64
   const base64 = Buffer.from(JSON.stringify(hashedString)).toString('base64');
   const reversed64Str = base64.split('').reverse().join('');
-  return reversed64Str;
+  return Promise.resolve(reversed64Str);
 }
 
 async function unsif(input: string, privateKey: string): Promise<string> {
