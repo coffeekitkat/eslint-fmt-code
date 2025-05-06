@@ -53,7 +53,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup --format esm,cjs --clean --dts",
+    "build": "tsup",
     "stub": "tsup --format esm",
     "watch": "npm run build -- --watch src",
     "lint": "eslint .",
