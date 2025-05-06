@@ -52,7 +52,9 @@
     "lint:fix": "eslint --fix .",
     "start": "tsx src/index.ts",
     "test": "vitest --test-timeout=24000",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && pnpm publish"
   },
   "dependencies": {
     "@antfu/eslint-config": "^4.12.0",
