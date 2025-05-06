@@ -23,7 +23,7 @@ describe('telemetry', () => {
       
       if(metricFileExists) {
         const metricContent = readFile(path.join(configDir, '.telemetry-config'));
-        console.log('metricContent', metricContent);
+        console.log('metricContent', metricContent.toString('utf-8'));
       }
       
       expect(stat).not.toBeUndefined();
