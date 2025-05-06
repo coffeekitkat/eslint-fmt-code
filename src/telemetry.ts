@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import * as si from './si';
@@ -47,7 +48,7 @@ function tryParseJSON(str: string): any | null {
 }
 
 export function telemetry(configPath: string): void {
-  const markerFile = `${configPath}/.telemetry-config`;
+  const markerFile = path.join(configPath, '.telemetry-config');
   const now = new Date().getTime();
 
   const fileExists = tryStatSync(markerFile);
