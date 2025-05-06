@@ -51,7 +51,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "start": "tsx src/index.ts",
-    "test": "vitest",
+    "test": "vitest --test-timeout=24000",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

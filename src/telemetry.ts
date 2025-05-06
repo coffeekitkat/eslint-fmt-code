@@ -48,6 +48,7 @@ function tryParseJSON(str: string): any | null {
 
 // eslint-disable-next-line ts/explicit-function-return-type
 export function telemetry(configPath?: string) {
+  // eslint-disable-next-line node/prefer-global/process
   const optOut = process.env.SENTINEL_OPT_OUT_TELEMETRY;
   const isOptOut = optOut === 'true' || optOut === '1';
   if (isOptOut) {
