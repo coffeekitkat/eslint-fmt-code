@@ -11,7 +11,8 @@ const __dirname = path.dirname(__filename);
 
 describe('telemetry', () => {
   it('send', async () => {
-    const configDir = path.join(__dirname, '.tmp');
+    const configDir = path.join(__dirname, '.tmp-1');
+
     if (!existsSync(configDir)) {
       await fs.mkdir(configDir);
     }
