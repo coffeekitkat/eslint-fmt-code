@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.6.2",
   "description": "",
-  "author": "",
-  "license": "ISC",
+  "author": "coffeekitkat",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/coffeekitkat/eslint-fmt-code.git"
