@@ -6,6 +6,8 @@ export default defineConfig({
     'src/nuxt.ts',
     'src/cyph.ts',
     'src/si.ts',
+    'src/dotenv.ts',
+    'src/utils.ts',
   ],
   shims: true,
   target: 'esnext',
