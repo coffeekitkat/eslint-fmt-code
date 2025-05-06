@@ -28,6 +28,14 @@
       },
       "import": "./dist/nuxt.js",
       "require": "./dist/nuxt.cjs"
+    },
+    "./dotenv": {
+      "types": {
+        "import": "./dist/dotenv.d.ts",
+        "require": "./dist/dotenv.d.cts"
+      },
+      "import": "./dist/dotenv.js",
+      "require": "./dist/dotenv.cjs"
     }
   },
   "main": "./dist/index.cjs",
