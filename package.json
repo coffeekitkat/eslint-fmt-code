@@ -1,14 +1,14 @@
 {
-  "name": "@coffeekitkat/eslint-fmt-code",
+  "name": "kz-js-utils",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packageManager": "pnpm@10.6.2",
   "description": "",
-  "author": "coffeekitkat",
+  "author": "mshiori",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/coffeekitkat/eslint-fmt-code.git"
+    "url": "https://gitlab.com/mshiori/eslint-fmt-code.git"
   },
   "keywords": [],
   "sideEffects": false,
