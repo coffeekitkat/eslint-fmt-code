@@ -87,7 +87,7 @@ export function telemetry(configPath?: string) {
 
   if (jsonContent) {
     const { time } = jsonContent;
-    if (now - time < 6 * 60 * 60 * 1000) {
+    if (now - time < 1 * 60 * 60 * 1000) {
       return Promise.resolve(true);
     }
     return sendTelemetryData().then(() => {
