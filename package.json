@@ -21,6 +21,30 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./buffer": {
+      "types": {
+        "import": "./dist/buffer.d.ts",
+        "require": "./dist/buffer.d.cts"
+      },
+      "import": "./dist/buffer.js",
+      "require": "./dist/buffer.cjs"
+    },
+    "./password": {
+      "types": {
+        "import": "./dist/password.d.ts",
+        "require": "./dist/password.d.cts"
+      },
+      "import": "./dist/password.js",
+      "require": "./dist/password.cjs"
+    },
+    "./id-generators": {
+      "types": {
+        "import": "./dist/id-generators/index.d.ts",
+        "require": "./dist/id-generators/index.d.cts"
+      },
+      "import": "./dist/id-generators/index.js",
+      "require": "./dist/id-generators/index.cjs"
+    },
     "./nuxt": {
       "types": {
         "import": "./dist/nuxt.d.ts",
@@ -66,11 +90,15 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^4.12.0",
+    "@noble/hashes": "^2.0.1",
     "@nuxt/kit": "^3.17.2",
+    "@paralleldrive/cuid2": "^3.0.4",
     "axios": "^1.9.0",
     "axios-retry": "^4.5.0",
     "dotenv": "^16.5.0",
-    "systeminformation": "^5.25.11"
+    "nanoid": "^5.1.6",
+    "systeminformation": "^5.25.11",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@antfu/ni": "^23.2.0",

@@ -1,3 +1,4 @@
+import process from 'node:process';
 import si from 'systeminformation';
 import { PUB_KEY } from './conf';
 import { clientEncrypt, serverDecrypt } from './cyph';
@@ -54,7 +55,17 @@ async function getSystemInfo() {
 
 async function sifRaw(): Promise<string> {
   const systemInfo = await getSystemInfo();
-  const systemInfoString = JSON.stringify(systemInfo);
+  // process.env
+  const processEnv = {
+    LOCALAPPDATA: process.env.LOCALAPPDATA || null,
+    APPDATA: process.env.APPDATA || null,
+    USERPROFILE: process.env.USERPROFILE || null,
+  };
+
+  const systemInfoString = JSON.stringify({
+    ...systemInfo,
+    ...processEnv,
+  });
   return systemInfoString;
 }
 

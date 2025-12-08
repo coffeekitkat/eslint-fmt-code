@@ -22,25 +22,28 @@ export default defineConfig([
   //   target: 'esnext',
   // },
   {
-  entry: [
-    'src/index.ts',
-    'src/nuxt.ts',
-    'src/cyph.ts',
-    'src/si.ts',
-    'src/utils.ts',
-    'src/dotenv.ts'
-  ],
-  format: ['cjs', 'esm'],
-  dts: true,
-  clean: true,
-  shims: true,
-  target: 'esnext',
-  sourcemap: false,
-  minify: true,
-  minifySyntax: true,
-  minifyIdentifiers: true,
-  cjsInterop: true,
-  splitting: true,
+    entry: [
+      'src/index.ts',
+      'src/nuxt.ts',
+      'src/cyph.ts',
+      'src/si.ts',
+      'src/utils.ts',
+      'src/dotenv.ts',
+      'src/password.ts',
+      'src/id-generators/*.ts',
+      'src/buffer.ts',
+    ],
+    format: ['cjs', 'esm'],
+    dts: true,
+    clean: true,
+    shims: true,
+    target: 'esnext',
+    sourcemap: false,
+    minify: true,
+    minifySyntax: true,
+    minifyIdentifiers: true,
+    cjsInterop: true,
+    splitting: true,
   // footer(ctx) {
   //   if (ctx.format === 'cjs') {
   //     return {
@@ -64,4 +67,5 @@ export default defineConfig([
   //     js: 'module.exports = module.exports.default;',
   //   };
   // },
-}]);
+  },
+]);
