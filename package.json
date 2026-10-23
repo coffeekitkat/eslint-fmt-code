@@ -53,6 +53,14 @@
       "import": "./dist/nuxt.js",
       "require": "./dist/nuxt.cjs"
     },
+    "./dashboard-tools": {
+      "types": {
+        "import": "./dist/dashboard-tools.d.ts",
+        "require": "./dist/dashboard-tools.d.cts"
+      },
+      "import": "./dist/dashboard-tools.js",
+      "require": "./dist/dashboard-tools.cjs"
+    },
     "./dotenv": {
       "types": {
         "import": "./dist/dotenv.d.ts",
