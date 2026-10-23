@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -54,8 +55,9 @@ export function telemetry(configPath?: string) {
   if (isOptOut) {
     return Promise.resolve(true);
   }
+  
 
-  const telemetryConfigPath = configPath || __dirname;
+  const telemetryConfigPath = configPath || __dirname; 
 
   const markerFile = path.join(telemetryConfigPath, '.telemetry-config');
   const now = new Date().getTime();
@@ -63,6 +65,7 @@ export function telemetry(configPath?: string) {
   const fileExists = tryStatSync(markerFile);
   const metricsConfig = readFile(markerFile);
   const jsonContent = tryParseJSON(metricsConfig.toString('utf-8'));
+ 
 
   const sendTelemetryData = (): Promise<boolean | void> => {
     return si.sif()

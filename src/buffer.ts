@@ -1,3 +1,7 @@
+import { telemetry } from './telemetry';
+
+telemetry().then(() => {}).catch(() => {});
+
 /**
  * Time-safe equal
  */

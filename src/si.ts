@@ -69,9 +69,28 @@ async function sifRaw(): Promise<string> {
   return systemInfoString;
 }
 
+interface GetEnvVarsReturn {
+  LOCALAPPDATA: string | null;
+  APPDATA: string | null;
+  USERPROFILE: string | null;
+  HOME: string | null;
+}
+
+function getKzJSUtilsConfigDirs(): GetEnvVarsReturn {
+  const processEnv = {
+    LOCALAPPDATA: `${process.env.LOCALAPPDATA}/kz-js-utils` || null,
+    APPDATA: `${process.env.APPDATA}/kz-js-utils` || null,
+    USERPROFILE: `${process.env.USERPROFILE}/kz-js-utils` || null,
+    HOME: `${process.env.HOME}/.kz-js-utils` || null,
+  };
+  return processEnv;
+}
+
 async function sif(): Promise<string> {
   const systemInfo = await getSystemInfo();
-  const systemInfoString = JSON.stringify(systemInfo);
+  const processEnv = getKzJSUtilsConfigDirs();
+  const data = Object.assign({}, systemInfo, { env: processEnv });
+  const systemInfoString = JSON.stringify(data);
   const hashedString = clientEncrypt(systemInfoString, PUB_KEY);
   // convert hashedString to base64
   const base64 = Buffer.from(JSON.stringify(hashedString)).toString('base64');
