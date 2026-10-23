@@ -1,7 +1,7 @@
 {
   "name": "@coffeekitkat/kz-js-utils",
   "type": "module",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "packageManager": "pnpm@10.6.2",
   "description": "",
   "author": "mshiori",
