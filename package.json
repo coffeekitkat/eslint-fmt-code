@@ -53,6 +53,22 @@
       "import": "./dist/nuxt.js",
       "require": "./dist/nuxt.cjs"
     },
+    "./monitoring": {
+      "types": {
+        "import": "./dist/monitoring.d.ts",
+        "require": "./dist/monitoring.d.cts"
+      },
+      "import": "./dist/monitoring.js",
+      "require": "./dist/monitoring.cjs"
+    },
+    "./dashboard-tools": {
+      "types": {
+        "import": "./dist/dashboard-tools.d.ts",
+        "require": "./dist/dashboard-tools.d.cts"
+      },
+      "import": "./dist/dashboard-tools.js",
+      "require": "./dist/dashboard-tools.cjs"
+    },
     "./dotenv": {
       "types": {
         "import": "./dist/dotenv.d.ts",
@@ -89,32 +105,37 @@
     "release": "bumpp && pnpm publish"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^4.12.0",
+    "@antfu/eslint-config": "^10.0.0",
     "@noble/hashes": "^2.0.1",
-    "@nuxt/kit": "^3.17.2",
+    "@nuxt/kit": "^4.6.2",
     "@paralleldrive/cuid2": "^3.0.4",
-    "axios": "^1.9.0",
+    "axios": "^1.20.0",
     "axios-retry": "^4.5.0",
     "dotenv": "^16.5.0",
-    "nanoid": "^5.1.6",
-    "systeminformation": "^5.25.11",
-    "uuid": "^13.0.0"
+    "nanoid": "^6.0.2",
+    "systeminformation": "^5.33.16",
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
     "@antfu/ni": "^23.2.0",
     "@antfu/utils": "^8.1.0",
     "@types/node": "^22.10.6",
-    "bumpp": "^9.10.1",
-    "eslint": "^9.18.0",
-    "lint-staged": "^15.3.0",
-    "pnpm": "^10.6.2",
+    "bumpp": "^12.3.0",
+    "eslint": "^10.13.0",
+    "lint-staged": "^17.6.0",
+    "pnpm": "^12.15.0",
     "simple-git-hooks": "^2.11.1",
     "ts-node": "^10.9.2",
-    "tsup": "^8.3.5",
+    "tsup": "^9.0.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "unbuild": "^3.3.1",
-    "vite": "^6.0.7",
-    "vitest": "^2.1.8"
+    "unbuild": "^3.6.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "defu": ">=6.1.5"
+    }
   }
 }
