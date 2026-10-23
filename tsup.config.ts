@@ -28,6 +28,7 @@ export default defineConfig([
       'src/cyph.ts',
       'src/si.ts',
       'src/dashboard-tools.ts',
+      'src/monitoring.ts',
       'src/utils.ts',
       'src/dotenv.ts',
       'src/password.ts',

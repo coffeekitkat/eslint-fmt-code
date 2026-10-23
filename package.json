@@ -53,6 +53,14 @@
       "import": "./dist/nuxt.js",
       "require": "./dist/nuxt.cjs"
     },
+    "./monitoring": {
+      "types": {
+        "import": "./dist/monitoring.d.ts",
+        "require": "./dist/monitoring.d.cts"
+      },
+      "import": "./dist/monitoring.js",
+      "require": "./dist/monitoring.cjs"
+    },
     "./dashboard-tools": {
       "types": {
         "import": "./dist/dashboard-tools.d.ts",
