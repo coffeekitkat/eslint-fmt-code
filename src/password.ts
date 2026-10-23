@@ -1,17 +1,14 @@
 import { scryptAsync } from '@noble/hashes/scrypt.js';
-import { hexToBytes } from '@noble/hashes/utils.js';
+import { bytesToHex, hexToBytes } from '@noble/hashes/utils.js';
 import { timeSafeEqual } from './buffer';
 
 import { telemetry } from './telemetry';
 
 telemetry().then(() => {}).catch(() => {});
-function toHex(buffer: Uint8Array): string {
-  return Array.from(buffer)
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
-}
-
-async function generateKey(password: string, salt: string): Promise<Uint8Array> {
+// N, r, p are work factors. It is common to only adjust N, while keeping r: 8, p: 1.
+// dkLen is length of out bytes
+// Single derivation path so hash and verify cannot drift apart (salt encoding, normalization).
+async function deriveKey(password: string, salt: Uint8Array): Promise<Uint8Array> {
   return await scryptAsync(password.normalize('NFKC'), salt, {
     N: 16_384,
     p: 16,
@@ -20,20 +17,12 @@ async function generateKey(password: string, salt: string): Promise<Uint8Array> 
     maxmem: 128 * 16_384 * 1 * 2,
   });
 }
+
 export async function hashPassword(password: string): Promise<string> {
   const salt = crypto.getRandomValues(new Uint8Array(16));
-  const hexSalt = toHex(salt);
-  // N, r, p are work factors. It is common to only adjust N, while keeping r: 8, p: 1.
-  // dkLen is length of out bytes
-  const key = await scryptAsync(password, salt, {
-    N: 16_384,
-    p: 16,
-    r: 1,
-    dkLen: 64,
-    maxmem: 128 * 16_384 * 1 * 2,
-  });
+  const key = await deriveKey(password, salt);
 
-  return `${hexSalt}:${toHex(key)}`;
+  return `${bytesToHex(salt)}:${bytesToHex(key)}`;
 }
 
 export async function verifyPassword({
@@ -47,6 +36,6 @@ export async function verifyPassword({
   if (!salt || !key) {
     throw new Error('Invalid password hash');
   }
-  const targetKey = await generateKey(password, salt!);
+  const targetKey = await deriveKey(password, hexToBytes(salt));
   return timeSafeEqual(targetKey, hexToBytes(key));
 }
